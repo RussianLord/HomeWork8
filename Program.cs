@@ -64,7 +64,7 @@ void SortRows(int[,] numbers)
         {
             for(int k = 0; k < columns; k++)
             {
-                if(numbers[i, k] > numbers[i, k + 1]) (numbers[i, k], numbers[i, k + 1]) = (numbers[i, k + 1], numbers[i, k]);
+                if(numbers[i, k] < numbers[i, k + 1]) (numbers[i, k], numbers[i, k + 1]) = (numbers[i, k + 1], numbers[i, k]);
             }           
         }
     }
@@ -86,6 +86,57 @@ void SortColumns(int[,] numbers)
     }
 }
 
+void HW2()
+{
+    Console.Clear();
+    Random random = new Random();
+    int rows = random.Next(2, 6);
+    int columns = random.Next(2, 6);
+    int[,] numbers = new int[rows, columns];
+    Console.WriteLine($"В массиве {rows} строк и {columns} столбцов.");
+    if(rows == columns) Console.WriteLine("Массив не является прямоугольным.");
+    else
+    {
+        FillArray(numbers);
+        PrintArray(numbers);
+        CheckArray(numbers);
+    }
+}
+
+void CheckArray(int[,] numbers)
+{
+    int rows = numbers.GetLength(0);
+    int columns = numbers.GetLength(1);
+    int sum = 0;
+    int[] sumarray = new int[rows];
+    for(int i = 0; i < rows; i++)
+    {
+        sum = 0;
+        for(int j = 0; j < columns; j++)
+        {
+           sum = sum + numbers[i,j];
+           sumarray[i] = sum;
+        }
+        Console.WriteLine(sumarray[i] + "\t");
+    }
+    int minElement = sumarray[0];
+    int size = sumarray.Length;
+    int minIndex = 1;
+    for(int i = 1; i < size; i++)
+    {
+        if(minElement > sumarray[i])
+        {    
+            minElement = sumarray[i];
+            minIndex = i + 1;
+        }
+    }
+    Console.WriteLine($"Строка {minIndex} имеет наименьшую сумму элементов");
+    
+    
+   
+}
 
 
-HW1();
+
+// HW1();
+HW2();
