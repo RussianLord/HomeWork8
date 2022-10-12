@@ -89,6 +89,9 @@ void SortColumns(int[,] numbers)
 void HW2()
 {
     Console.Clear();
+    Console.WriteLine("Данная программа создаёт случайный двухмерный массив размером от 2x2 до 5x5 и сообщает номер строки с самой низкой суммой элементов строки...");
+    Console.WriteLine("Нажмите ENTER, чтобы создать массив...");
+    Console.ReadLine();
     Random random = new Random();
     int rows = random.Next(2, 6);
     int columns = random.Next(2, 6);
@@ -109,6 +112,7 @@ void CheckArray(int[,] numbers)
     int columns = numbers.GetLength(1);
     int sum = 0;
     int[] sumarray = new int[rows];
+    Console.WriteLine("Массив из сумма чисал двухмерного массива.");
     for(int i = 0; i < rows; i++)
     {
         sum = 0;
@@ -119,6 +123,7 @@ void CheckArray(int[,] numbers)
         }
         Console.WriteLine(sumarray[i] + "\t");
     }
+    Console.WriteLine();
     int minElement = sumarray[0];
     int size = sumarray.Length;
     int minIndex = 1;
@@ -130,13 +135,87 @@ void CheckArray(int[,] numbers)
             minIndex = i + 1;
         }
     }
-    Console.WriteLine($"Строка {minIndex} имеет наименьшую сумму элементов");
+    Console.WriteLine($"Строка {minIndex} имеет наименьшую сумму элементов. Сумма элементов = {sumarray[minIndex - 1]}");
     
     
    
 }
 
+void HW3()
+{
+    Console.Clear();
+    Console.WriteLine("Данная программа заполняет массив по спирали. Размер 4x4");
+    Console.WriteLine("Нажмите ENTER, чтобы создать массив...");
+    Console.ReadLine();
+    int rows = 4;
+    int columns = 4;
+    int[,] numbers = new int[rows, columns];
+    Console.WriteLine($"В массиве {rows} строк и {columns} столбцов.");
+    FillRound(numbers);
+    PrintArray(numbers);
+}
 
-
+void FillRound(int[,] numbers)
+{
+    int size = 4;
+    int count = 0;
+    for(int i = 0; i < size - 3; i++)
+    {
+        for(int j = 0; j < numbers.GetLength(1); j++)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int j = 3; j < size; j++)
+    {
+        for(int i = 1; i < numbers.GetLength(0); i++)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int i = 3; i < size; i++)
+    {
+        for(int j = 2; j >= 0; j--)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int j = 0; j < size - 3; j++)
+    {
+        for(int i = 2; i > 0; i--)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int i = 1; i <= size - 3; i++)
+    {
+        for(int j = 1; j < size - 1; j++)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int j = 2; j < size - 1; j++)
+    {
+        for(int i = 2; i < size - 1; i++)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+    for(int i = 2; i < size - 1; i++)
+    {
+        for(int j = 1; j > 0; j--)
+        {
+            count++;
+            numbers[i, j] = count;
+        }
+    }
+}
 // HW1();
-HW2();
+// HW2();
+HW3();
